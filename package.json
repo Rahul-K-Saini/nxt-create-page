@@ -1,0 +1,23 @@
+{
+  "name": "nxt-create-page",
+  "version": "1.0.3",
+  "description": "CLI tool to create Next.js pages",
+  "main": "cli.js",
+  "bin": {
+    "nxt": "./cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nextjs",
+    "cli",
+    "page-creator"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/prompts": "^3.0.0"
+  }
+}
