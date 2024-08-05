@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 
-import { promisify } from 'util';
-import { exec as execCallback } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import { input } from '@inquirer/prompts';
 
-const exec = promisify(execCallback);
 
 async function promptYesNo(message) {
   while (true) {
