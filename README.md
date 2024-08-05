@@ -8,7 +8,6 @@ You can install this package globally using npm:
 
 ```bash
 npm install -g nxt-create-page
-
 ```
 
 For local installation:
@@ -17,13 +16,26 @@ npm install nxt-create-page
 ```
 
 ## Usage
+
+```bash
+nxt create page [options] [component-name]
+```
+shorthand 
+
+```bash
+nxt c p [options] [component-name]
+```
+
+# Example 
+
 ```bash
 nxt create page
 ```
-or shorthand 
+
 ```bash
-nxt c p
+nxt c p -y mypage
 ```
+
 
 # Features
 
