@@ -2,19 +2,8 @@
 
 import fs from 'fs/promises';
 import path from 'path';
-import { input } from '@inquirer/prompts';
-
-
-async function promptYesNo(message) {
-  while (true) {
-    const response = await input({ message });
-    const lowerResponse = response.toLowerCase();
-    if (lowerResponse === 'y' || lowerResponse === 'n') {
-      return lowerResponse === 'y';
-    }
-    console.log("Please enter 'y' for yes or 'n' for no.");
-  }
-}
+import { input, confirm } from '@inquirer/prompts';
+import chalk from 'chalk';
 
 async function createComponent(baseDir, componentName, isTS) {
   const componentDir = path.join(baseDir, componentName);
@@ -35,29 +24,37 @@ export default function ${capitalizedName}() {
   try {
     await fs.mkdir(componentDir, { recursive: true });
     await fs.writeFile(filePath, content);
-    console.log(`Component ${componentName} created successfully.`);
+    console.log(chalk.green(`Component ${componentName} created successfully.`));
   } catch (error) {
-    console.error(`Error creating component: ${error.message}`);
+    console.error(chalk.red(`Error creating component: ${error.message}`));
     throw error;
   }
 }
 
-
 async function main() {
   const args = process.argv.slice(2);
-  
-  if (args.length === 0 || (args[0] !== 'create' && args[0] !== 'c') || (args[1] !== 'page' && args[1] !== 'p')) {
-    console.log("Usage: nxt create page OR nxt c p");
+
+  if (args.length === 0 || !['create', 'c'].includes(args[0]) || !['page', 'p'].includes(args[1])) {
+    console.log(chalk.yellow("Usage: nxt create page OR nxt c p"));
     process.exit(1);
   }
 
   try {
-    const isUsingSrc = await promptYesNo('Are you using src folder? [y/n]: ');
-    const isUsingTS = await promptYesNo('Are you using TypeScript? [y/n]: ');
-    
-    const componentName = await input({ message: 'Enter the component name: ' });
-    if (!componentName.trim()) {
-      console.log("Component name cannot be empty. Exiting.");
+    let isUsingSrc, isUsingTS, componentName;
+    const useDefaults = args[2] === '-y';
+
+    if (useDefaults) {
+      isUsingSrc = true;
+      isUsingTS = true;
+      componentName = args[3];
+    } else {
+      isUsingSrc = await confirm({ message: 'Are you using src folder?', default: true });
+      isUsingTS = await confirm({ message: 'Are you using TypeScript?', default: true });
+      componentName = args[3] || await input({ message: 'Enter the component name:' });
+    }
+
+    if (!componentName?.trim()) {
+      console.log(chalk.red("Component name cannot be empty. Exiting."));
       process.exit(1);
     }
 
@@ -65,7 +62,7 @@ async function main() {
     await createComponent(baseDir, componentName, isUsingTS);
 
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error(chalk.red("An error occurred:"), error);
     process.exit(1);
   }
 }
