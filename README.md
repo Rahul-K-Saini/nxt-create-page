@@ -31,6 +31,11 @@ nxt c p [options] [page-name]
 ```bash
 nxt create page
 ```
+then select the options
+
+or 
+
+if you are using the default options i.e typescript and src folder then run the command like this
 
 ```bash
 nxt c p -y mypage
