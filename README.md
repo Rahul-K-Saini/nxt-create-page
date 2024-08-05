@@ -18,12 +18,12 @@ npm install nxt-create-page
 ## Usage
 
 ```bash
-nxt create page [options] [component-name]
+nxt create page [options] [page-name]
 ```
 shorthand 
 
 ```bash
-nxt c p [options] [component-name]
+nxt c p [options] [page-name]
 ```
 
 # Example 
