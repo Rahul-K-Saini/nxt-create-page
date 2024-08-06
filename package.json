@@ -1,5 +1,5 @@
 {
-  "name": "nxt-create-page",
+  "name": "nxt-cli",
   "version": "1.0.10",
   "description": "CLI tool to create Next.js pages",
   "main": "cli.js",
