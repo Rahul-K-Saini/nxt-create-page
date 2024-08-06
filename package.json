@@ -15,7 +15,7 @@
     "cli",
     "page-creator"
   ],
-  "author": "Your Name",
+  "author": "Rahul Saini",
   "license": "ISC",
   "dependencies": {
     "@inquirer/prompts": "^3.0.0",
